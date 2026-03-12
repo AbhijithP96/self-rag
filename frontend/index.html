@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Minimalist AI Chat Interface</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+                tailwind.config = {
+                    darkMode: "class",
+                    theme: {
+                        extend: {
+                            colors: {
+                                "primary": "#3b82f6",
+                                "primary-hover": "#2563eb",
+                                "background-light": "#f6f8f8",
+                                "background-dark": "#0f172a",
+                                "surface-dark": "#1e293b",
+                                "surface-lighter": "#334155",
+                                "border-color": "#334155",
+                                "text-main": "#f1f5f9",
+                                "text-muted": "#94a3b8",
+                                "input-bg": "#1e293b",
+                            },
+                            fontFamily: {
+                                "display": ["Inter", "sans-serif"],
+                                "sans": ["Inter", "sans-serif"]
+                            },
+                            borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                        },
+                    },
+                }
+        </script>
+        <style>::-webkit-scrollbar {
+                    width: 8px;
+                    height: 8px;
+                }
+                ::-webkit-scrollbar-track {
+                    background: #0f172a; 
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: #334155; 
+                    border-radius: 4px;
+                }
+                ::-webkit-scrollbar-thumb:hover {
+                    background: #475569; 
+                }
+            </style>
+    </head>
+    <body class="bg-background-light dark:bg-background-dark font-display antialiased text-text-main overflow-hidden h-screen flex">
+        <aside class="w-[300px] bg-surface-dark border-r border-border-color flex flex-col h-full flex-shrink-0 transition-all duration-300">
+            <div class="p-6">
+                <button class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white font-semibold transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-95" id="new">
+                <span class="material-symbols-outlined">add</span>
+                <span>New Chat</span>
+                </button>
+            </div>
+            <div class="flex-1"></div>
+            <div class="p-6 border-t border-border-color bg-surface-dark">
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-text-muted flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">smart_toy</span>
+                        Ollama Cloud Model Selection
+                    </label>
+
+                    <select id="model-select"
+                        class="w-full bg-background-dark border border-border-color rounded-lg px-3 py-2.5 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+
+                        <option value="qwen3-vl:235b-instruct-cloud">Qwen3-vl</option>
+                        <option value="gpt-oss:120b-cloud">GPT-OSS</option>
+                        <option value="mistral-large-3:675b-cloud">Mistral-Large-3</option>
+                        <option value="cogito-2.1:671b-cloud">Cogito-2.1</option>
+
+                    </select>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <label class="text-xs font-semibold uppercase tracking-wider text-text-muted flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">vpn_key</span>
+                                            OLLAMA API Configuration
+                                        </label>
+                    <div class="relative group">
+                        <input class="w-full bg-background-dark border border-border-color rounded-lg px-3 py-2.5 text-sm text-text-main placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="api" placeholder="Enter API Key" type="password"/>
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted cursor-pointer hover:text-text-main">
+                            <span class="material-symbols-outlined text-[18px]" id="toggle-visibility">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="w-full py-2 px-3 rounded-lg border border-primary text-primary text-sm font-medium hover:bg-primary/10 hover:text-primary-hover transition-colors flex items-center justify-center gap-2" id="save">
+                        <span class="material-symbols-outlined text-[16px]">save</span>
+                        Save Key
+                    </button>
+                    </div>
+                    <p class="text-[10px] text-text-muted leading-tight">
+                                        Your key is stored locally in your browser and used only for requests.
+                                    </p>
+                </div>
+            </div>
+        </aside>
+        <main class="flex-1 flex flex-col h-full relative bg-background-dark">
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col items-center" id="playground">
+                <div class="flex-1 flex flex-col items-center justify-center text-center max-w-2xl w-full opacity-60" id="startup-head">
+                    <div class="mb-6 p-4 bg-surface-lighter rounded-2xl inline-flex">
+                        <span class="material-symbols-outlined text-4xl text-primary">smart_toy</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-text-main mb-2" id="chat-head">How can I help you today?</h1>
+                    <p class="text-text-muted">Upload a document or start typing to interact with the AI.</p>
+                </div>
+            </div>
+            <div class="p-4 md:p-6 bg-background-dark/95 backdrop-blur border-t border-border-color">
+                <div class="max-w-3xl mx-auto relative">
+                    <div class="relative bg-surface-dark border border-border-color rounded-2xl shadow-sm focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all overflow-hidden">
+                        <textarea class="w-full bg-transparent border-0 text-text-main placeholder-text-muted px-4 py-4 pr-12 focus:ring-0 resize-none max-h-48 overflow-y-auto" id="query" placeholder="Send a message..." rows="1" style="min-height: 56px;"></textarea>
+                        <div class="absolute bottom-2 right-2 flex items-center gap-1">
+                        <button class="p-2 text-text-muted hover:text-primary hover:bg-surface-lighter rounded-lg transition-colors" title="Upload Document" id="upload">
+                            <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                        </button>
+                        <button class="p-2 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" title="Send Message">
+                            <span class="material-symbols-outlined text-[20px]" id="sndbtn">arrow_upward</span>
+                        </button>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <p class="text-[10px] text-text-muted">AI can make mistakes. Consider checking important information.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script type="module" src="/js/logger.js"></script>
+        <script type="module" src="/js/load.js"></script>
+        <script type="module" src="/js/api.js"></script>
+        <script type="module" src="/js/chat.js"></script>
+    </body>
+</html>

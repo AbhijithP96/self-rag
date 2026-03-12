@@ -1,0 +1,15 @@
+loguru
+flask
+gunicorn
+pydantic
+redis
+qdrant-client
+pymongo
+pypdf
+ollama
+langchain
+langchain-community
+langchain-ollama
+langchain-qdrant
+langchain-huggingface
+sentence-transformers
