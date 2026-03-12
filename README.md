@@ -2,23 +2,6 @@
 
 A production-grade Retrieval-Augmented Generation (RAG) chatbot application that combines Flask backend with a modern web frontend, using multi-stage LLM reasoning to provide accurate, context-aware responses.
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Project Structure](#project-structure)
-- [Usage Guide](#usage-guide)
-- [Development Notes](#development-notes)
-
----
-
 ## 🎯 Overview
 
 Self-RAG Chat is an advanced AI chat application that implements the Self-Reflective Retrieval-Augmented Generation (Self-RAG) pattern. It enables users to:
