@@ -4,7 +4,7 @@ A production-grade Retrieval-Augmented Generation (RAG) chatbot application that
 
 ## 🎯 Overview
 
-Self-RAG Chat is an advanced AI chat application that implements the Self-Reflective Retrieval-Augmented Generation (Self-RAG) pattern. It enables users to:
+Self-RAG Chat is a simple AI chat application that implements the Self-Reflective Retrieval-Augmented Generation (Self-RAG) pattern. It enables users to:
 
 - Chat with multiple LLM models (Ollama Cloud)
 - Upload and index PDF documents
@@ -15,6 +15,10 @@ Self-RAG Chat is an advanced AI chat application that implements the Self-Reflec
 The application uses a microservices architecture with Docker containers for easy deployment and scaling.
 
 ---
+
+## Demo
+
+![example](/demo.gif)
 
 ## ✨ Features
 
