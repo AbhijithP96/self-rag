@@ -195,6 +195,55 @@ Before you begin, ensure you have:
    ```
    The frontend can be accessed at `http://localhost:8080 `
 
+### Option 3: Kubernetes with Minikube
+
+Deploy the application on a local Kubernetes cluster using Minikube.
+
+**Prerequisites:**
+- Minikube installed and running
+- kubectl CLI configured
+- Docker.
+
+**Deployment Steps:**
+
+1. **Start Minikube** (if not already running):
+   ```bash
+   minikube start
+   ```
+
+2. **Deploy to Kubernetes**:
+   ```bash
+   # Apply all Kubernetes manifests
+   kubectl apply -f kube/
+   
+   # Verify deployments
+   kubectl get pods
+   ```
+
+**Ensure all pods are running before the next step.**
+
+3. **Access the Application**:
+   ```bash
+   # Get the service URL
+   minikube service frontend-service # Opens frontend service in browser
+   ```
+
+4. **Clean Up**:
+   ```bash
+   # Delete all resources
+   kubectl delete -f kube/
+   
+   # Or stop Minikube
+   minikube stop
+   ```
+
+**Kubernetes Artifacts** (`kube/` directory):
+- `backend.yaml` - Flask backend deployment with service
+- `frontend.yaml` - Nginx frontend deployment with service
+- `redis.yaml` - Redis cache deployment with service
+- `mongo.yaml` - MongoDB deployment with persistent volume
+- `qdrant.yaml` - Qdrant vector database deployment with service
+
 ---
 
 ## ⚙️ Configuration
