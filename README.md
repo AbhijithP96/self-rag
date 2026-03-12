@@ -120,7 +120,7 @@ The application uses a microservices architecture with Docker containers for eas
 
 Before you begin, ensure you have:
 
-- **Docker** (version 20.10+) and **Docker Compose** (version 2.0+)
+- **Docker** and **Docker Compose**
 - **Python 3.11+** (for local development)
 - **Ollama Account** and API key (https://ollama.com)
 - **Git** (for version control)
@@ -139,7 +139,7 @@ Before you begin, ensure you have:
 
 2. **Build and start containers:**
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
    This will start:
@@ -151,7 +151,7 @@ Before you begin, ensure you have:
 
 3. **Verify services are running:**
    ```bash
-   docker-compose ps
+   docker compose ps
    ```
 
 ### Option 2: Local Development Setup
@@ -164,7 +164,6 @@ Before you begin, ensure you have:
 
 2. **Install dependencies:**
    ```bash
-   cd backend
    pip install -r requirements.txt
    ```
 
@@ -238,14 +237,14 @@ embeddings = HuggingFaceEmbeddings(
 
 ```bash
 # Start all services
-docker-compose up -d
+docker compose up -d
 
 # View logs
-docker-compose logs -f backend
-docker-compose logs -f frontend
+docker compose logs -f backend
+docker compose logs -f frontend
 
 # Stop all services
-docker-compose down
+docker compose down
 ```
 
 ### Health Check
@@ -356,7 +355,7 @@ flask/
    - System automatically creates a session
 
 2. **Set Up Ollama API Key**
-   - Get API key from https://ollama.com/account
+   - Get API key from https://ollama.com/
    - Select desired model from dropdown
    - Paste API key into "OLLAMA API Configuration" section
    - Click "Save Key"
@@ -404,7 +403,7 @@ flask/
 **Backend Debugging:**
 ```bash
 # View real-time logs
-docker-compose logs -f backend
+docker compose logs -f backend
 
 ```
 
